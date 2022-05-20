@@ -21,5 +21,5 @@
 ## Installing packages
 1. React router: `npm install react-router-dom@5.2.0` 
 2. Cornerstone: `npm install cornerstone-core --save`, `npm install cornerstone-math --save`, `npm install cornerstone-tools --save`, `npm install cornerstone-web-image-loader --save`, `npm install hammerjs`
-3. 
+
 
