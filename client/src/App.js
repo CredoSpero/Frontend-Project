@@ -1,31 +1,22 @@
-import React, { useState, useEffect} from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import HomePage from './pages/HomePage';
+import Member from './pages/Member';
+import Viewer from './pages/Viewer';
 
 function App() {
 
-  const [data, setData] = useState([{}])
-
-  useEffect(()=> {
-    fetch("/members").then(
-      res => res.json()
-      ).then(
-        data => {
-          setData(data)
-          console.log(data)
-        }
-      )
-  }, [])
-
-
   return (
     <div>
-      {(typeof data.members === 'undefined') ? (
-        <p>Loading...</p>
-      ) : (
-        data.members.map((member, index) => (
-          <p key = {index}>{member}</p>
-        ))
-      )}
+      <h1>This is where the nav bar should go...</h1>
 
+      <Router>
+        <Switch>
+          <Route path="/" exact component = {HomePage}/>
+          <Route path="/member" exact component ={Member}/>
+          <Route path="/viewer" exact component ={Viewer}/>
+        </Switch>
+      </Router>
     </div>
   )
 }
