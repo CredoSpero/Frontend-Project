@@ -17,3 +17,9 @@
 3. Create a proxy to connect frontend to the backend by navigating to the package.json file and entering the following line before dependencies: `"proxy": "http://localhost:5000"`
 4. To start the frontend, navigate to the client folder and run `npm start`
 5. Note that in order for the backend information to be displayed on the front end, the server has to be start up as well
+
+## Installing packages
+1. React router: `npm install react-router-dom@5.2.0` 
+2. Cornerstone: `npm install cornerstone-core --save`, `npm install cornerstone-math --save`, `npm install cornerstone-tools --save`, `npm install cornerstone-web-image-loader --save`, `npm install hammerjs`
+
+
