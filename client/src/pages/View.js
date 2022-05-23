@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState
 } from "react";
-import {createRoot, unstable_batchedUpdates} from "react-dom";
+import {unstable_batchedUpdates} from "react-dom";
 import cornerstone from "cornerstone-core";
 import cornerstoneMath from "cornerstone-math";
 import cornerstoneTools from "cornerstone-tools";
@@ -61,7 +61,7 @@ const leftMouseToolChain = [
   { name: "Eraser", func: cornerstoneTools.EraserTool, config: {} }
 ];
 
-const App = () => {
+function View () {
   const [wheelY, setWheelY] = useState(0);
   const [opacity, setOpacity] = useState(0);
   const [layerIndex, setLayerIndex] = useState(1);
@@ -408,5 +408,6 @@ const App = () => {
   );
 };
 
-const root = createRoot(document.getElementById("root"))
-root.render(<App />);
+export default View;
+// const root = ReactDOM.createRoot(document.getElementById("root"))
+// root.render(<App />);
