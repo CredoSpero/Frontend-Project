@@ -114,7 +114,7 @@ function Viewer () {
 
 
   useEffect(() => {
-    if (!viewerRef.current) {
+    if (!viewerRef.current) { // Value will be false after mounting as viewerRef.current will be assigned with the DOM element
       return;
     }
 
@@ -127,6 +127,7 @@ function Viewer () {
     init();
     setTools();
     setEventListeners();
+
     return () => {
       removeEventListeners();
     };
@@ -188,6 +189,7 @@ function Viewer () {
         }
       );
     }
+
     function setTools() {
       // zoom
       const zoomTool = cornerstoneTools.ZoomTool;
@@ -239,6 +241,7 @@ function Viewer () {
     }
   }, [updateTheImages]);
 
+  
   const onClickToggleInterpolation = () => {
     const viewport = cornerstone.getViewport(viewerRef.current);
     viewport.pixelReplication = !viewport.pixelReplication;
