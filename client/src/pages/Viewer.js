@@ -10,6 +10,8 @@ import cornerstone from "cornerstone-core";
 import cornerstoneMath from "cornerstone-math";
 import cornerstoneTools from "cornerstone-tools";
 import cornerstoneWebImageLoader from "cornerstone-web-image-loader";
+import cornerstoneWADOImageLoader from "cornerstone-wado-image-loader";
+import dicomParser from "dicom-parser";
 import Hammer from "hammerjs";
 
 const mriImages = [
@@ -78,27 +80,36 @@ function Viewer () {
     leftMouseToolChain[0].name //default left click is to "Pan"
   );
 
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [imageIds, setImageIds] = useState([]);
+  let element;
+
   // All react references
   const viewerRef = useRef(null);
   const leftMouseToolsRef = useRef(null);
 
-  // Function that returns all the ImageLoadObject from the images in the layers array 
+  // Function that returns the ImageLoadObject in the layers array (index 0 being the first combinatino of MRI and segmentation images)
+  // NOTE that the default index is 0, thus, the first combination of MRI and segmentation images will be displayed
   function loadImages(index = 0) {
     const promises = [];
 
     // NOTE: A layer refers to a type of images (eg. Segmentation or MRI)
     layers.forEach(function (layer) {
       if (layer.options.visible) {
+        console.log("ImageId: ", layer.images[index]);
         const loadPromise = cornerstone.loadAndCacheImage(layer.images[index]); // returns ImageLoadObject which is a promise  
         promises.push(loadPromise);
       }
     });
 
-    return Promise.all(promises); // Loads all the images if all is sucessful and will not load any if a single fails
+    // Loads all the images if all is sucessful and will not load any if a single fails
+    return Promise.all(promises); 
   }
 
+  // Function that upadates the images (based on index) whenever the viewerRef is altered. useCallback returns the function 'updateTheImages" itself
   const updateTheImages = useCallback(
     async (index) => {
+      console.log("Updating the images. Currently in the function updateTheImages");
       const images = await loadImages(index); // Calls the loadImages function which returns all the Image Objects
       images.forEach((image, index) => {
         cornerstone.setLayerImage( // Sets a new image for a specific layedid
@@ -108,30 +119,46 @@ function Viewer () {
         );
         cornerstone.updateImage(viewerRef.current); // Forces the images to be updated/ redrawn for the specificed enabled element
       });
+      console.log("Current layers: ", cornerstone.getLayers(viewerRef.current));
     },
-    [viewerRef] // NOT SURE BUT: On initial rendering, viewerRef is null. But after mounting and when the elements has already been created in DOM, viewerRef.current is assigned the DOM element and hence the useCallBack will run
+    []
   );
 
-
+  // An effect that runs whenever updateTheImages function is altered 
   useEffect(() => {
     if (!viewerRef.current) { // Value will be false after mounting as viewerRef.current will be assigned with the DOM element
       return;
     }
 
+    console.log("Currently in the useEffect function");
+
     cornerstoneTools.external.cornerstone = cornerstone;
     cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
     cornerstoneWebImageLoader.external.cornerstone = cornerstone;
     cornerstoneTools.external.Hammer = Hammer;
+    cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
+    cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
     cornerstoneTools.init();
+
+    // Enabling the viewerRef element 
     cornerstone.enable(viewerRef.current);
     init();
     setTools();
     setEventListeners();
 
+    console.log("Current layers FINAL: ", cornerstone.getLayers(viewerRef.current));
+    console.log("Current active layer FINAL: ", cornerstone.getActiveLayer(viewerRef.current));
+
+    // ADDED LINES
+    // element = document.getElementById("dicomImage");
+    // cornerstone.enable(element);
+
+    // When component gets unmounted -> need to remove all the event listeners
     return () => {
       removeEventListeners();
     };
 
+    // NEED TO IMPLEMENT REMOVE EVENT LISTENERS IF NOT THE EVENTS WILL ALWAYS BE LISTENED FOR
     function removeEventListeners() {}
 
     function setEventListeners() {
@@ -141,6 +168,7 @@ function Viewer () {
           // console.log(event.detail)
         }
       );
+
       viewerRef.current.addEventListener(
         "cornerstonetoolsmousewheel",
         (event) => {
@@ -172,11 +200,12 @@ function Viewer () {
         }
       );
 
-      // active layer
+      // Whenever the active layer is changed. Updates the parameters 
       viewerRef.current.addEventListener(
         "cornerstoneactivelayerchanged",
         function (e) {
           const layer = cornerstone.getActiveLayer(viewerRef.current);
+          console.log("Currently in event listener. Current active layer: ", layer);
           const colormap = layer.viewport.colormap;
           const opacity = layer.options.opacity;
           const isVisible = layer.options.visible;
@@ -191,6 +220,9 @@ function Viewer () {
     }
 
     function setTools() {
+
+      console.log("Currently in setTools function");
+      
       // zoom
       const zoomTool = cornerstoneTools.ZoomTool;
       cornerstoneTools.addTool(zoomTool, {
@@ -220,26 +252,32 @@ function Viewer () {
     }
 
     async function init() {
+
+      // Images now contains the first combination of images: MRI + Segmentation
       const images = await loadImages();
+      console.log("Images array: ", images);
+
       images.forEach((image, index) => {
         const layer = layers[index];
-        const layerId = cornerstone.addLayer(
+        const layerId = cornerstone.addLayer( // Added both MRI + Segmentation as a layer
           viewerRef.current,
           image,
           layer.options
         );
         layers[index].layerId = layerId;
 
-        // segmantaion 
-        if (index === 1) {
+        // Segmentation will be the active layer
+        if (index === 1) { 
           cornerstone.setActiveLayer(viewerRef.current, layerId);
         }
 
         // Display the first image
+        console.log("Current layers: ", cornerstone.getLayers(viewerRef.current));
         cornerstone.updateImage(viewerRef.current);
       });
     }
-  }, [updateTheImages]);
+
+  }, []);
 
   
   const onClickToggleInterpolation = () => {
@@ -257,8 +295,7 @@ function Viewer () {
   const onChangeVisibility = (event) => {
     setIsVisible((isVisible = true) => {
       isVisible = !isVisible;
-      // false일 때 이미지 로딩하기
-      // 만약 visible false로 두고 스크롤 시 visible false인 이미지는 loading하지 않음
+      
       const layer = cornerstone.getActiveLayer(viewerRef.current);
       layer.options.visible = isVisible;
       if (isVisible) {
@@ -269,7 +306,6 @@ function Viewer () {
         return isVisible;
       }
     });
-    // cornerstone에서 object 값을 listen 한다.
     cornerstone.updateImage(viewerRef.current);
   };
 
@@ -282,13 +318,14 @@ function Viewer () {
   };
 
   const onChangeLayer = (event) => {
-    const index = event.target.value;
+    const index = event.target.value; // Index 0 refers to MRI and index 1 refers to Segmentation
     setLayerIndex(index);
     cornerstone.setActiveLayer(viewerRef.current, layers[index].layerId);
+    console.log("Layer being changed... currently in onChangeLayer function");
   };
 
   const onChangeColorMapList = (event) => {
-    // greyscale 일 때 color map 이슈가 있음 https://github.com/cornerstonejs/cornerstone/issues/463
+    // greyscale https://github.com/cornerstonejs/cornerstone/issues/463
     const color = event.target.value;
     const layer = cornerstone.getActiveLayer(viewerRef.current);
     layer.viewport.colormap = color;
@@ -329,9 +366,72 @@ function Viewer () {
     setLeftMouseTool(toolName);
   };
 
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    setUploadedFiles(files);
+    const imageIds = files.map(file => {
+      return cornerstoneWADOImageLoader.wadouri.fileManager.add(file);
+    });
+    setImageIds(imageIds);
+    const StackScrollMouseWheelTool =
+      cornerstoneTools.StackScrollMouseWheelTool;
+    const stack = {
+      currentImageIdIndex: 0,
+      imageIds
+    };
+    cornerstone.loadImage(imageIds[0]).then(image => {
+      cornerstone.displayImage(element, image);
+      cornerstoneTools.addStackStateManager(element, ["stack"]);
+      cornerstoneTools.addToolState(element, "stack", stack);
+    });
+    setTimeout(() => {
+      imageIds.forEach(imageId => {
+        const thumbnailElement = document.getElementById(imageId);
+        cornerstone.enable(thumbnailElement);
+        cornerstone.loadImage(imageId).then(image => {
+          cornerstone.displayImage(thumbnailElement, image);
+          cornerstoneTools.addStackStateManager(element, ["stack"]);
+          cornerstoneTools.addToolState(element, "stack", stack);
+        });
+      });
+    }, 1000);
+    cornerstoneTools.addTool(StackScrollMouseWheelTool);
+    cornerstoneTools.setToolActive("StackScrollMouseWheel", {});
+  };
+
   return (
     <div>
       <div>
+        <input type="file" onChange={handleFileChange} multiple />
+        
+        <div className="dicom-wrapper">
+          <h1>TEST</h1>
+          <div className="thumbnail-selector">
+            <div className="thumbnail-list" id="thumbnail-list">
+              {imageIds.map(imageId => {
+                return (
+                  <a
+                    onContextMenu={() => false}
+                    unselectable="on"
+                    onMouseDown={() => false}
+                    onSelect={() => false}
+                  >
+                    
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+          <div
+            onContextMenu={() => false}
+            className="dicom-viewer"
+            unselectable="on"
+          >
+          <div id="dicomImage" />
+        </div>
+      </div>
+
+
         <label htmlFor="layer">Active layer: </label>
         <select id="layer" onChange={onChangeLayer} value={layerIndex}>
           <option value={0}>MRI</option>
