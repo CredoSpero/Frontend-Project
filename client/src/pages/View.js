@@ -10,7 +10,7 @@ import dicomParser from "dicom-parser";
 import "./View.css";
 
 const segmentationImages = [
-    // "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/RupturedAAA.png/250px-RupturedAAA.png",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/RupturedAAA.png/250px-RupturedAAA.png",
     "https://miro.medium.com/max/394/1*WmnWtjS5UhGxCuKoAF4XpA.png"
 ];
 
@@ -78,22 +78,6 @@ const View = () => {
     const [opacity, setOpacity] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
     
-    // NOT NEED FUNCTION
-    const loadAndViewImage = imageId => {
-        const element = document.getElementById("dicomImage");
-        const start = new Date().getTime();
-        cornerstone.loadImage(imageId).then(
-        function(image) {
-            console.log(image);
-            const viewport = cornerstone.getDefaultViewportForImage(element, image);
-            cornerstone.displayImage(element, image, viewport);
-        },
-        function(err) {
-            alert(err);
-        }
-        );
-    };
-
     function loadImages(index = 1) {
         const promises = [];
 
@@ -215,33 +199,21 @@ const View = () => {
 
         function setEventListeners() {
             
-            // viewerRef.current.addEventListener(
+            // element.addEventListener(
             //   "cornerstonetoolsmousewheel",
             //   (event) => {
-            //     // scroll forward
-            //     if (event.detail.detail.deltaY < 0) {
-            //       setWheelY((position) => {
-            //         if (position >= 1) {
-            //           position = 1;
-            //         } else {
-            //           position += 1;
-            //         }
-      
-            //         updateTheImages(position);
-            //         return position;
-            //       });
-            //     } else {
-            //       // scroll back
-            //       setWheelY((position) => {
-            //         if (position <= 0) {
-            //           position = 0;
-            //         } else {
-            //           position -= 1;
-            //         }
-      
-            //         updateTheImages(position);
-            //         return position;
-            //       });
+            //     const layer = cornerstone.getActiveLayer(element);
+            //     const currentLayer = layer.options.name;
+
+            //     console.log("Current Active Layer: ", currentLayer);
+            //     if (currentLayer == "SEGMENTATION") {
+            //         console.log("in segment");
+            //         cornerstoneTools.setToolPassive("StackScrollMouseWheel");
+            //     } 
+            //     else if (currentLayer == "DICOM") {
+            //         console.log("in segment");
+
+            //         cornerstoneTools.setToolActive("StackScrollMouseWheel", {});
             //     }
             //   }
             // );
@@ -254,11 +226,21 @@ const View = () => {
                 // const colormap = layer.viewport.colormap;
                 const opacity = layer.options.opacity;
                 const isVisible = layer.options.visible;
+                const currentLayer = layer.options.name;
+
+                console.log("Current Active Layer: ", currentLayer);
+                if (currentLayer == "SEGMENTATION") {
+                    console.log("in segment");
+                    cornerstoneTools.setToolPassive("StackScrollMouseWheel");
+                } 
+                else if (currentLayer == "DICOM") {
+                    console.log("in dicom");
+                    cornerstoneTools.setToolActive("StackScrollMouseWheel", {});
+                }
       
                 unstable_batchedUpdates(() => {
                   setOpacity(opacity);
                   setIsVisible(isVisible);
-                //   setColor(colormap);
                 });
               }
             );
@@ -330,11 +312,7 @@ const View = () => {
             
             const layer = cornerstone.getActiveLayer(element);
             layer.options.visible = isVisible;
-            if (isVisible) {
-                return isVisible;
-            } else {
             return isVisible;
-            }
         });
         cornerstone.updateImage(element);
     };
@@ -362,7 +340,7 @@ const View = () => {
             value={opacity}
             />
 
-            <label htmlFor="visible"> visibility : </label>
+            <label htmlFor="visible"> Visibility : </label>
             <input
             id="visible"
             type="checkbox"
