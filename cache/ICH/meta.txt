@@ -1,0 +1,318 @@
+{
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034076": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034078": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034080": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034082": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034084": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034086": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034088": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {
+            "0": {
+                "url": "/data/howc0006/ICH_detection_FYP/cache/ICH/1.2.276.0.7230010.3.1.4.296485376.1.1521714314.2034088/subarachnoid_0.png",
+                "bbox": [
+                    "181",
+                    "267",
+                    "224",
+                    "305"
+                ],
+                "conf": "0.88745356"
+            }
+        },
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034090": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034092": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {
+            "0": {
+                "url": "/data/howc0006/ICH_detection_FYP/cache/ICH/1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034092/subarachnoid_0.png",
+                "bbox": [
+                    "176",
+                    "211",
+                    "236",
+                    "296"
+                ],
+                "conf": "0.91889733"
+            },
+            "1": {
+                "url": "/data/howc0006/ICH_detection_FYP/cache/ICH/1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034092/subarachnoid_1.png",
+                "bbox": [
+                    "239",
+                    "201",
+                    "276",
+                    "236"
+                ],
+                "conf": "0.8884104"
+            }
+        },
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034094": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034096": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {
+            "0": {
+                "url": "/data/howc0006/ICH_detection_FYP/cache/ICH/1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034096/subarachnoid_0.png",
+                "bbox": [
+                    "182",
+                    "264",
+                    "223",
+                    "310"
+                ],
+                "conf": "0.89025"
+            }
+        },
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034098": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034100": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034102": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034104": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034106": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {
+            "0": {
+                "url": "/data/howc0006/ICH_detection_FYP/cache/ICH/1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034106/subarachnoid_0.png",
+                "bbox": [
+                    "270",
+                    "266",
+                    "312",
+                    "319"
+                ],
+                "conf": "0.3129119"
+            }
+        },
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034108": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034110": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034112": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034114": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034116": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034118": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {
+            "0": {
+                "url": "/data/howc0006/ICH_detection_FYP/cache/ICH/1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034118/subarachnoid_0.png",
+                "bbox": [
+                    "197",
+                    "242",
+                    "237",
+                    "286"
+                ],
+                "conf": "0.85387003"
+            }
+        },
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034120": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034122": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {
+            "0": {
+                "url": "/data/howc0006/ICH_detection_FYP/cache/ICH/1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034122/subarachnoid_0.png",
+                "bbox": [
+                    "237",
+                    "181",
+                    "277",
+                    "226"
+                ],
+                "conf": "0.8920282"
+            }
+        },
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034124": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034126": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034128": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034130": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034132": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    },
+    "1.2.276.0.7230010.3.1.4.296485376.1.1521714315.2034134": {
+        "chronic": {},
+        "epidural": {},
+        "intraparenchymal": {},
+        "intraventricular": {},
+        "subarachnoid": {},
+        "subdural": {}
+    }
+}

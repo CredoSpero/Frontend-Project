@@ -1,0 +1,27 @@
+
+{
+    "sub-0028": {
+        "100": {
+            "wm": {
+                "url": "/data/ychan019/experiments/radiaide/code/inference/test_kcl_p2p_seg_alt_wm/B/sub-0028_100.png",
+                "vol": 100
+            },
+            "gm": {
+                "url": "/data/ychan019/experiments/radiaide/code/inference/test_kcl_p2p_seg_alt_gm/B/sub-0028_100.png",
+                "vol": 100
+            },
+            "csf": {
+                "url": "/data/ychan019/experiments/radiaide/code/inference/test_kcl_p2p_seg_alt_csf/B/sub-0028_100.png",
+                "vol": 100
+            },
+            "vent": {
+                "url": "/data/ychan019/experiments/radiaide/code/inference/test_kcl_p2p_seg_alt_vent/B/sub-0028_100.png",
+                "vol": 100
+            },
+            "brain": {
+                "url": "/data/ychan019/experiments/radiaide/code/inference/test_kcl_p2p_seg_alt_bet/B/sub-0028_100.png",
+                "vol": 100
+            }
+        }
+    }
+}
