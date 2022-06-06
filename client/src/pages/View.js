@@ -6,12 +6,20 @@ import cornerstoneTools from "cornerstone-tools";
 import Hammer from "hammerjs";
 import * as cornerstoneWebImageLoader from "cornerstone-web-image-loader";
 import cornerstoneWADOImageLoader from "cornerstone-wado-image-loader";
+import cornerstoneFileImageLoader from "cornerstone-file-image-loader";
 import dicomParser from "dicom-parser";
+import imageToBase64 from "image-to-base64/browser";
 import "./View.css";
 
 const segmentationImages = [
     "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/RupturedAAA.png/250px-RupturedAAA.png",
     "https://miro.medium.com/max/394/1*WmnWtjS5UhGxCuKoAF4XpA.png"
+];
+
+const segmentationMasks = [
+    "C:\Users\YI XUAN\Desktop\NTU\AY2021-2022 SEM 2\Front-end development\Frontend-SelfProject\cache\Tissue\sub-0028\sub-0028_101.png",
+    "C:\Users\YI XUAN\Desktop\NTU\AY2021-2022 SEM 2\Front-end development\Frontend-SelfProject\cache\Tissue\sub-0028\sub-0028_102.png",
+    "C:\Users\YI XUAN\Desktop\NTU\AY2021-2022 SEM 2\Front-end development\Frontend-SelfProject\cache\Tissue\sub-0028\sub-0028_103.png"
 ];
 
 // A layers array to store and set the settings for the different kinds of images 
@@ -50,12 +58,15 @@ let pngElement;
 
 const View = () => {
 
+    const imageToBase64 = require('image-to-base64');
+
     cornerstoneTools.external.cornerstone = cornerstone;
     cornerstoneTools.external.Hammer = Hammer;
     cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
     cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
     cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
     cornerstoneWebImageLoader.external.cornerstone = cornerstone;
+    cornerstoneFileImageLoader.external.cornerstone = cornerstone;
     
     cornerstoneTools.init();
 
@@ -94,6 +105,21 @@ const View = () => {
 
         return Promise.all(promises); // Contains ALL the PNG ImageLoadObject
     }
+
+    // const readImages = async () => {
+    //     let imageIds = []
+
+    //     for (const segmentationMask of segmentationMasks){
+    //         const response = await imageToBase64(segmentationMask);
+    //         const arrayBuffer = await decode(response);
+    //         const imageId = 
+    //             await cornerstoneFileImageLoader.fileManager.addBuffer(arrayBuffer);
+    //         imageIds.push(imageId);
+    //     }
+        
+    //     console.log("Segmentation masks array: ", imageIds);
+    //     return imageIds;
+    // }
 
     useEffect(() => {
         element = document.getElementById("dicomImage");
@@ -175,6 +201,7 @@ const View = () => {
 
         async function init() {
             
+            // const imageIdsArray = await readImages(); 
             const images = await loadImages(); // Contains ALL the PNG ImageLoadObject
             console.log("Images array: ", images);
     
@@ -198,25 +225,6 @@ const View = () => {
         }
 
         function setEventListeners() {
-            
-            // element.addEventListener(
-            //   "cornerstonetoolsmousewheel",
-            //   (event) => {
-            //     const layer = cornerstone.getActiveLayer(element);
-            //     const currentLayer = layer.options.name;
-
-            //     console.log("Current Active Layer: ", currentLayer);
-            //     if (currentLayer == "SEGMENTATION") {
-            //         console.log("in segment");
-            //         cornerstoneTools.setToolPassive("StackScrollMouseWheel");
-            //     } 
-            //     else if (currentLayer == "DICOM") {
-            //         console.log("in segment");
-
-            //         cornerstoneTools.setToolActive("StackScrollMouseWheel", {});
-            //     }
-            //   }
-            // );
       
             // Whenever the active layer is changed. Updates the parameters 
             element.addEventListener(
