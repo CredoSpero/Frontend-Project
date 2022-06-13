@@ -8,7 +8,8 @@ import * as cornerstoneWebImageLoader from "cornerstone-web-image-loader";
 import cornerstoneWADOImageLoader from "cornerstone-wado-image-loader";
 import cornerstoneFileImageLoader from "cornerstone-file-image-loader";
 import dicomParser from "dicom-parser";
-import imageToBase64 from "image-to-base64/browser";
+// import {imageToBase64} from "image-to-base64";
+import {decode} from "base64-arraybuffer";
 import "./View.css";
 
 const segmentationImages = [
@@ -32,7 +33,7 @@ const layers = [
         opacity: 1,
         name: "DICOM",
         viewport: {
-        colormap: ""
+            colormap: ""
         }
     }
     },
@@ -44,11 +45,11 @@ const layers = [
         visible: true,
         opacity: 0.7,
         viewport: {
-        colormap: "",
-        voi: {
-            windowWidth: 30,
-            windowCenter: 16
-        }
+            colormap: "",
+            voi: {
+                windowWidth: 30,
+                windowCenter: 16
+            }
         }
     }}
 ];
@@ -106,20 +107,20 @@ const View = () => {
         return Promise.all(promises); // Contains ALL the PNG ImageLoadObject
     }
 
-    // const readImages = async () => {
-    //     let imageIds = []
+    const readImages = async () => {
+        let imageIds = []
 
-    //     for (const segmentationMask of segmentationMasks){
-    //         const response = await imageToBase64(segmentationMask);
-    //         const arrayBuffer = await decode(response);
-    //         const imageId = 
-    //             await cornerstoneFileImageLoader.fileManager.addBuffer(arrayBuffer);
-    //         imageIds.push(imageId);
-    //     }
+        for (const segmentationMask of segmentationMasks){
+            const response = await imageToBase64(segmentationMask);
+            const arrayBuffer = await decode(response);
+            const imageId = 
+                await cornerstoneFileImageLoader.fileManager.addBuffer(arrayBuffer);
+            imageIds.push(imageId);
+        }
         
-    //     console.log("Segmentation masks array: ", imageIds);
-    //     return imageIds;
-    // }
+        console.log("Segmentation masks array: ", imageIds);
+        return imageIds;
+    }
 
     useEffect(() => {
         element = document.getElementById("dicomImage");
@@ -201,7 +202,7 @@ const View = () => {
 
         async function init() {
             
-            // const imageIdsArray = await readImages(); 
+            const imageIdsArray = await readImages(); 
             const images = await loadImages(); // Contains ALL the PNG ImageLoadObject
             console.log("Images array: ", images);
     
