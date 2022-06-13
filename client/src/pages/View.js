@@ -107,20 +107,20 @@ const View = () => {
         return Promise.all(promises); // Contains ALL the PNG ImageLoadObject
     }
 
-    const readImages = async () => {
-        let imageIds = []
+    // const readImages = async () => {
+    //     let imageIds = []
 
-        for (const segmentationMask of segmentationMasks){
-            const response = await imageToBase64(segmentationMask);
-            const arrayBuffer = await decode(response);
-            const imageId = 
-                await cornerstoneFileImageLoader.fileManager.addBuffer(arrayBuffer);
-            imageIds.push(imageId);
-        }
+    //     for (const segmentationMask of segmentationMasks){
+    //         const response = await imageToBase64(segmentationMask);
+    //         const arrayBuffer = await decode(response);
+    //         const imageId = 
+    //             await cornerstoneFileImageLoader.fileManager.addBuffer(arrayBuffer);
+    //         imageIds.push(imageId);
+    //     }
         
-        console.log("Segmentation masks array: ", imageIds);
-        return imageIds;
-    }
+    //     console.log("Segmentation masks array: ", imageIds);
+    //     return imageIds;
+    // }
 
     useEffect(() => {
         element = document.getElementById("dicomImage");
@@ -202,7 +202,7 @@ const View = () => {
 
         async function init() {
             
-            const imageIdsArray = await readImages(); 
+            // const imageIdsArray = await readImages(); 
             const images = await loadImages(); // Contains ALL the PNG ImageLoadObject
             console.log("Images array: ", images);
     
